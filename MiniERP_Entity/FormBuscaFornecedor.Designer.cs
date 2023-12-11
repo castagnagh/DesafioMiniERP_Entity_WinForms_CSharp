@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            textBoxBuscaNomeForneProduto = new TextBox();
             label2 = new Label();
             buttonSelecionarFornecedor = new Button();
             listViewFornecedoresBusca = new ListView();
             id = new ColumnHeader();
             razaoSocial = new ColumnHeader();
             cnpj = new ColumnHeader();
+            maskedTextBoxBusca = new MaskedTextBox();
             SuspendLayout();
             // 
             // label1
@@ -46,14 +46,6 @@
             label1.Size = new Size(89, 15);
             label1.TabIndex = 0;
             label1.Text = "Busca por CNPJ";
-            // 
-            // textBoxBuscaNomeForneProduto
-            // 
-            textBoxBuscaNomeForneProduto.Location = new Point(26, 44);
-            textBoxBuscaNomeForneProduto.Name = "textBoxBuscaNomeForneProduto";
-            textBoxBuscaNomeForneProduto.Size = new Size(418, 23);
-            textBoxBuscaNomeForneProduto.TabIndex = 1;
-            textBoxBuscaNomeForneProduto.KeyUp += buscaFormFornecedores;
             // 
             // label2
             // 
@@ -101,15 +93,24 @@
             cnpj.Text = "CNPJ";
             cnpj.Width = 160;
             // 
+            // maskedTextBoxBusca
+            // 
+            maskedTextBoxBusca.Location = new Point(26, 44);
+            maskedTextBoxBusca.Mask = "00,000,000/0000-00";
+            maskedTextBoxBusca.Name = "maskedTextBoxBusca";
+            maskedTextBoxBusca.Size = new Size(418, 23);
+            maskedTextBoxBusca.TabIndex = 6;
+            maskedTextBoxBusca.KeyUp += buscaFormFornecedores;
+            // 
             // FormBuscaFornecedor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(466, 449);
+            Controls.Add(maskedTextBoxBusca);
             Controls.Add(listViewFornecedoresBusca);
             Controls.Add(buttonSelecionarFornecedor);
             Controls.Add(label2);
-            Controls.Add(textBoxBuscaNomeForneProduto);
             Controls.Add(label1);
             Name = "FormBuscaFornecedor";
             Text = "FormBuscaFornecedor";
@@ -120,7 +121,6 @@
         #endregion
 
         private Label label1;
-        private TextBox textBoxBuscaNomeForneProduto;
         private Label label2;
         private Button buttonSelecionarFornecedor;
         private Button button1;
@@ -128,5 +128,6 @@
         private ColumnHeader razaoSocial;
         private ColumnHeader cnpj;
         private ColumnHeader id;
+        private MaskedTextBox maskedTextBoxBusca;
     }
 }

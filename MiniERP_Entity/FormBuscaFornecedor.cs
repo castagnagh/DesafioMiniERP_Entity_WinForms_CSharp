@@ -49,7 +49,7 @@ namespace MiniERP_Entity
         {
             try
             {
-                string cnpj = textBoxBuscaNomeForneProduto.Text;
+                string cnpj = maskedTextBoxBusca.Text;
                 List<Fornecedor> listaBuscaFornecedor = new List<Fornecedor>();
                 listaBuscaFornecedor.Clear();
                 listaBuscaFornecedor = contexto.Fornecedores

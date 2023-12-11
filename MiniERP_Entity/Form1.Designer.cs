@@ -41,6 +41,7 @@
             nomeItem = new ColumnHeader();
             precoItemCar = new ColumnHeader();
             qtdItem = new ColumnHeader();
+            precoTotalItem = new ColumnHeader();
             label16 = new Label();
             textBoxInformeQtd = new TextBox();
             labelInformeQtd = new Label();
@@ -73,11 +74,11 @@
             label2 = new Label();
             label1 = new Label();
             tabFornecedores = new TabPage();
+            textBoxBuscaCnpjFornecedor = new MaskedTextBox();
             listViewFornecedores = new ListView();
             razaoSocial = new ColumnHeader();
             cnpj = new ColumnHeader();
             label8 = new Label();
-            textBoxBuscaCnpjFornecedor = new TextBox();
             panel2 = new Panel();
             buttonCadastrarFornecedor = new Button();
             maskedTextBoxCnpjFornecedor = new MaskedTextBox();
@@ -112,20 +113,31 @@
             label10 = new Label();
             label11 = new Label();
             tabNotas = new TabPage();
+            label22 = new Label();
+            listViewNotasCliente = new ListView();
+            columnHeader6 = new ColumnHeader();
+            columnHeader7 = new ColumnHeader();
+            columnHeader8 = new ColumnHeader();
+            columnHeader9 = new ColumnHeader();
+            panel4 = new Panel();
+            maskedTextBox2 = new MaskedTextBox();
             button7 = new Button();
+            button10 = new Button();
             textBoxIdHiddenClienteNotas = new TextBox();
-            label21 = new Label();
-            button2 = new Button();
             label20 = new Label();
-            listViewNotas = new ListView();
             dateTimePicker1 = new DateTimePicker();
-            textBoxNomeClienteNotas = new TextBox();
+            button2 = new Button();
             label19 = new Label();
+            textBoxNomeClienteNotas = new TextBox();
+            label21 = new Label();
+            listViewNotas = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
+            button8 = new Button();
+            button9 = new Button();
             tabControl1.SuspendLayout();
             tabVendas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -141,6 +153,7 @@
             tabProdutos.SuspendLayout();
             panel3.SuspendLayout();
             tabNotas.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -151,7 +164,7 @@
             tabControl1.Location = new Point(12, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1050, 606);
+            tabControl1.Size = new Size(1048, 606);
             tabControl1.TabIndex = 0;
             // 
             // tabVendas
@@ -160,7 +173,7 @@
             tabVendas.Location = new Point(4, 24);
             tabVendas.Name = "tabVendas";
             tabVendas.Padding = new Padding(3);
-            tabVendas.Size = new Size(1042, 578);
+            tabVendas.Size = new Size(1040, 578);
             tabVendas.TabIndex = 0;
             tabVendas.Text = "Loja";
             tabVendas.UseVisualStyleBackColor = true;
@@ -193,13 +206,13 @@
             splitContainer1.Panel2.Controls.Add(buttonPesquisaClienteLoja);
             splitContainer1.Panel2.Controls.Add(textBoxPesquisaClienteLoja);
             splitContainer1.Panel2.Controls.Add(label17);
-            splitContainer1.Size = new Size(1036, 572);
-            splitContainer1.SplitterDistance = 344;
+            splitContainer1.Size = new Size(1034, 572);
+            splitContainer1.SplitterDistance = 383;
             splitContainer1.TabIndex = 0;
             // 
             // button6
             // 
-            button6.Location = new Point(210, 528);
+            button6.Location = new Point(248, 524);
             button6.Name = "button6";
             button6.Size = new Size(114, 23);
             button6.TabIndex = 6;
@@ -247,10 +260,10 @@
             // 
             // listViewCarrinhoCompraLoja
             // 
-            listViewCarrinhoCompraLoja.Columns.AddRange(new ColumnHeader[] { nr, nomeItem, precoItemCar, qtdItem });
+            listViewCarrinhoCompraLoja.Columns.AddRange(new ColumnHeader[] { nr, nomeItem, precoItemCar, qtdItem, precoTotalItem });
             listViewCarrinhoCompraLoja.Location = new Point(17, 45);
             listViewCarrinhoCompraLoja.Name = "listViewCarrinhoCompraLoja";
-            listViewCarrinhoCompraLoja.Size = new Size(323, 423);
+            listViewCarrinhoCompraLoja.Size = new Size(345, 423);
             listViewCarrinhoCompraLoja.TabIndex = 1;
             listViewCarrinhoCompraLoja.UseCompatibleStateImageBehavior = false;
             listViewCarrinhoCompraLoja.View = View.Details;
@@ -263,16 +276,22 @@
             // nomeItem
             // 
             nomeItem.Text = "Nome";
-            nomeItem.Width = 150;
+            nomeItem.Width = 130;
             // 
             // precoItemCar
             // 
             precoItemCar.Text = "Preço Un.";
-            precoItemCar.Width = 70;
+            precoItemCar.Width = 65;
             // 
             // qtdItem
             // 
             qtdItem.Text = "Qtd";
+            qtdItem.Width = 45;
+            // 
+            // precoTotalItem
+            // 
+            precoTotalItem.Text = "Preç Total";
+            precoTotalItem.Width = 65;
             // 
             // label16
             // 
@@ -286,7 +305,7 @@
             // textBoxInformeQtd
             // 
             textBoxInformeQtd.Enabled = false;
-            textBoxInformeQtd.Location = new Point(167, 482);
+            textBoxInformeQtd.Location = new Point(153, 495);
             textBoxInformeQtd.Name = "textBoxInformeQtd";
             textBoxInformeQtd.Size = new Size(100, 23);
             textBoxInformeQtd.TabIndex = 9;
@@ -294,7 +313,7 @@
             // labelInformeQtd
             // 
             labelInformeQtd.AutoSize = true;
-            labelInformeQtd.Location = new Point(27, 486);
+            labelInformeQtd.Location = new Point(13, 499);
             labelInformeQtd.Name = "labelInformeQtd";
             labelInformeQtd.Size = new Size(124, 15);
             labelInformeQtd.TabIndex = 8;
@@ -302,7 +321,7 @@
             // 
             // buttonAddQtdItemLoja
             // 
-            buttonAddQtdItemLoja.Location = new Point(27, 511);
+            buttonAddQtdItemLoja.Location = new Point(13, 524);
             buttonAddQtdItemLoja.Name = "buttonAddQtdItemLoja";
             buttonAddQtdItemLoja.Size = new Size(240, 23);
             buttonAddQtdItemLoja.TabIndex = 7;
@@ -312,7 +331,7 @@
             // 
             // buttonRemoverNomePesquisaAreaitens
             // 
-            buttonRemoverNomePesquisaAreaitens.Location = new Point(574, 13);
+            buttonRemoverNomePesquisaAreaitens.Location = new Point(560, 13);
             buttonRemoverNomePesquisaAreaitens.Name = "buttonRemoverNomePesquisaAreaitens";
             buttonRemoverNomePesquisaAreaitens.Size = new Size(75, 23);
             buttonRemoverNomePesquisaAreaitens.TabIndex = 6;
@@ -322,7 +341,7 @@
             // 
             // textBoxIdClienteHiddenLoja
             // 
-            textBoxIdClienteHiddenLoja.Location = new Point(137, 14);
+            textBoxIdClienteHiddenLoja.Location = new Point(123, 14);
             textBoxIdClienteHiddenLoja.Name = "textBoxIdClienteHiddenLoja";
             textBoxIdClienteHiddenLoja.Size = new Size(30, 23);
             textBoxIdClienteHiddenLoja.TabIndex = 5;
@@ -330,7 +349,7 @@
             // 
             // buttonSelecionarItemLoja
             // 
-            buttonSelecionarItemLoja.Location = new Point(457, 511);
+            buttonSelecionarItemLoja.Location = new Point(443, 524);
             buttonSelecionarItemLoja.Name = "buttonSelecionarItemLoja";
             buttonSelecionarItemLoja.Size = new Size(192, 23);
             buttonSelecionarItemLoja.TabIndex = 4;
@@ -342,7 +361,7 @@
             // 
             listViewItensLoja.Columns.AddRange(new ColumnHeader[] { id, nome, precoItem, qtdEstoque, fornecedorItem });
             listViewItensLoja.FullRowSelect = true;
-            listViewItensLoja.Location = new Point(27, 82);
+            listViewItensLoja.Location = new Point(13, 82);
             listViewItensLoja.MultiSelect = false;
             listViewItensLoja.Name = "listViewItensLoja";
             listViewItensLoja.Size = new Size(622, 386);
@@ -376,7 +395,7 @@
             // 
             // buttonPesquisaClienteLoja
             // 
-            buttonPesquisaClienteLoja.Location = new Point(574, 45);
+            buttonPesquisaClienteLoja.Location = new Point(560, 45);
             buttonPesquisaClienteLoja.Name = "buttonPesquisaClienteLoja";
             buttonPesquisaClienteLoja.Size = new Size(75, 23);
             buttonPesquisaClienteLoja.TabIndex = 2;
@@ -387,7 +406,7 @@
             // textBoxPesquisaClienteLoja
             // 
             textBoxPesquisaClienteLoja.Enabled = false;
-            textBoxPesquisaClienteLoja.Location = new Point(27, 45);
+            textBoxPesquisaClienteLoja.Location = new Point(13, 45);
             textBoxPesquisaClienteLoja.Name = "textBoxPesquisaClienteLoja";
             textBoxPesquisaClienteLoja.Size = new Size(528, 23);
             textBoxPesquisaClienteLoja.TabIndex = 1;
@@ -395,7 +414,7 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(27, 17);
+            label17.Location = new Point(13, 17);
             label17.Name = "label17";
             label17.Size = new Size(104, 15);
             label17.TabIndex = 0;
@@ -407,7 +426,7 @@
             tabAdmin.Location = new Point(4, 24);
             tabAdmin.Name = "tabAdmin";
             tabAdmin.Padding = new Padding(3);
-            tabAdmin.Size = new Size(1042, 578);
+            tabAdmin.Size = new Size(1040, 578);
             tabAdmin.TabIndex = 1;
             tabAdmin.Text = "Administrador";
             tabAdmin.UseVisualStyleBackColor = true;
@@ -422,7 +441,7 @@
             tabControl2.Location = new Point(6, 6);
             tabControl2.Name = "tabControl2";
             tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new Size(1030, 566);
+            tabControl2.Size = new Size(1028, 566);
             tabControl2.TabIndex = 0;
             // 
             // tabClientes
@@ -434,7 +453,7 @@
             tabClientes.Location = new Point(4, 24);
             tabClientes.Name = "tabClientes";
             tabClientes.Padding = new Padding(3);
-            tabClientes.Size = new Size(1022, 538);
+            tabClientes.Size = new Size(1020, 538);
             tabClientes.TabIndex = 0;
             tabClientes.Text = "Gerenciar Clientes";
             tabClientes.UseVisualStyleBackColor = true;
@@ -447,7 +466,7 @@
             listViewClientes.Location = new Point(8, 222);
             listViewClientes.MultiSelect = false;
             listViewClientes.Name = "listViewClientes";
-            listViewClientes.Size = new Size(1007, 308);
+            listViewClientes.Size = new Size(1005, 308);
             listViewClientes.TabIndex = 4;
             listViewClientes.UseCompatibleStateImageBehavior = false;
             listViewClientes.View = View.Details;
@@ -467,9 +486,9 @@
             label4.AutoSize = true;
             label4.Location = new Point(8, 174);
             label4.Name = "label4";
-            label4.Size = new Size(82, 15);
+            label4.Size = new Size(140, 15);
             label4.TabIndex = 3;
-            label4.Text = "Buscar Cliente";
+            label4.Text = "Buscar cliente pelo nome";
             // 
             // textBoxBuscaCliente
             // 
@@ -491,7 +510,7 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(6, 6);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1010, 162);
+            panel1.Size = new Size(1008, 162);
             panel1.TabIndex = 0;
             // 
             // textBoxCpfCliente
@@ -501,13 +520,13 @@
             textBoxCpfCliente.Location = new Point(522, 81);
             textBoxCpfCliente.Mask = "000,000,000-00";
             textBoxCpfCliente.Name = "textBoxCpfCliente";
-            textBoxCpfCliente.Size = new Size(444, 23);
+            textBoxCpfCliente.Size = new Size(442, 23);
             textBoxCpfCliente.TabIndex = 4;
             // 
             // buttonCadastrarCliente
             // 
             buttonCadastrarCliente.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCadastrarCliente.Location = new Point(891, 120);
+            buttonCadastrarCliente.Location = new Point(889, 120);
             buttonCadastrarCliente.Name = "buttonCadastrarCliente";
             buttonCadastrarCliente.Size = new Size(75, 23);
             buttonCadastrarCliente.TabIndex = 5;
@@ -521,7 +540,7 @@
             textBoxNomeCliente.BorderStyle = BorderStyle.FixedSingle;
             textBoxNomeCliente.Location = new Point(36, 81);
             textBoxNomeCliente.Name = "textBoxNomeCliente";
-            textBoxNomeCliente.Size = new Size(444, 23);
+            textBoxNomeCliente.Size = new Size(442, 23);
             textBoxNomeCliente.TabIndex = 3;
             // 
             // label3
@@ -548,7 +567,7 @@
             // 
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
-            label1.Location = new Point(448, 14);
+            label1.Location = new Point(447, 14);
             label1.Name = "label1";
             label1.Size = new Size(115, 15);
             label1.TabIndex = 0;
@@ -556,17 +575,26 @@
             // 
             // tabFornecedores
             // 
+            tabFornecedores.Controls.Add(textBoxBuscaCnpjFornecedor);
             tabFornecedores.Controls.Add(listViewFornecedores);
             tabFornecedores.Controls.Add(label8);
-            tabFornecedores.Controls.Add(textBoxBuscaCnpjFornecedor);
             tabFornecedores.Controls.Add(panel2);
             tabFornecedores.Location = new Point(4, 24);
             tabFornecedores.Name = "tabFornecedores";
             tabFornecedores.Padding = new Padding(3);
-            tabFornecedores.Size = new Size(1022, 538);
+            tabFornecedores.Size = new Size(1020, 538);
             tabFornecedores.TabIndex = 1;
             tabFornecedores.Text = "Gerenciar Fornecedores";
             tabFornecedores.UseVisualStyleBackColor = true;
+            // 
+            // textBoxBuscaCnpjFornecedor
+            // 
+            textBoxBuscaCnpjFornecedor.Location = new Point(8, 192);
+            textBoxBuscaCnpjFornecedor.Mask = "00,000,000/0000-00";
+            textBoxBuscaCnpjFornecedor.Name = "textBoxBuscaCnpjFornecedor";
+            textBoxBuscaCnpjFornecedor.Size = new Size(433, 23);
+            textBoxBuscaCnpjFornecedor.TabIndex = 5;
+            textBoxBuscaCnpjFornecedor.KeyUp += KeyUpBuscarFornecedorCnpj;
             // 
             // listViewFornecedores
             // 
@@ -597,14 +625,6 @@
             label8.TabIndex = 3;
             label8.Text = "Buscar por CNPJ";
             // 
-            // textBoxBuscaCnpjFornecedor
-            // 
-            textBoxBuscaCnpjFornecedor.Location = new Point(8, 192);
-            textBoxBuscaCnpjFornecedor.Name = "textBoxBuscaCnpjFornecedor";
-            textBoxBuscaCnpjFornecedor.Size = new Size(433, 23);
-            textBoxBuscaCnpjFornecedor.TabIndex = 3;
-            textBoxBuscaCnpjFornecedor.KeyUp += KeyUpBuscarFornecedorCnpj;
-            // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
@@ -619,7 +639,7 @@
             panel2.Controls.Add(label7);
             panel2.Location = new Point(6, 6);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1010, 162);
+            panel2.Size = new Size(1008, 162);
             panel2.TabIndex = 1;
             // 
             // buttonCadastrarFornecedor
@@ -635,6 +655,7 @@
             // maskedTextBoxCnpjFornecedor
             // 
             maskedTextBoxCnpjFornecedor.Location = new Point(522, 81);
+            maskedTextBoxCnpjFornecedor.Mask = "00,000,000/0000-00";
             maskedTextBoxCnpjFornecedor.Name = "maskedTextBoxCnpjFornecedor";
             maskedTextBoxCnpjFornecedor.Size = new Size(433, 23);
             maskedTextBoxCnpjFornecedor.TabIndex = 1;
@@ -643,7 +664,7 @@
             // 
             maskedTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             maskedTextBox1.BorderStyle = BorderStyle.None;
-            maskedTextBox1.Location = new Point(1332, 81);
+            maskedTextBox1.Location = new Point(1330, 81);
             maskedTextBox1.Mask = "000,000,000-00";
             maskedTextBox1.Name = "maskedTextBox1";
             maskedTextBox1.Size = new Size(438, 16);
@@ -652,7 +673,7 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.Location = new Point(1695, 120);
+            button1.Location = new Point(1693, 120);
             button1.Name = "button1";
             button1.Size = new Size(75, 85);
             button1.TabIndex = 5;
@@ -691,7 +712,7 @@
             // 
             label7.Anchor = AnchorStyles.Top;
             label7.AutoSize = true;
-            label7.Location = new Point(423, 14);
+            label7.Location = new Point(422, 14);
             label7.Name = "label7";
             label7.Size = new Size(144, 15);
             label7.TabIndex = 0;
@@ -706,7 +727,7 @@
             tabProdutos.Location = new Point(4, 24);
             tabProdutos.Name = "tabProdutos";
             tabProdutos.Padding = new Padding(3);
-            tabProdutos.Size = new Size(1022, 538);
+            tabProdutos.Size = new Size(1020, 538);
             tabProdutos.TabIndex = 2;
             tabProdutos.Text = "Gerenciar Produtos";
             tabProdutos.UseVisualStyleBackColor = true;
@@ -781,7 +802,7 @@
             panel3.Controls.Add(label11);
             panel3.Location = new Point(3, 6);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1010, 162);
+            panel3.Size = new Size(1008, 162);
             panel3.TabIndex = 2;
             // 
             // buttonPesquisarForneceProduto
@@ -875,7 +896,7 @@
             // 
             maskedTextBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             maskedTextBox3.BorderStyle = BorderStyle.None;
-            maskedTextBox3.Location = new Point(2136, 81);
+            maskedTextBox3.Location = new Point(2134, 81);
             maskedTextBox3.Mask = "000,000,000-00";
             maskedTextBox3.Name = "maskedTextBox3";
             maskedTextBox3.Size = new Size(438, 16);
@@ -884,7 +905,7 @@
             // button3
             // 
             button3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            button3.Location = new Point(2499, 120);
+            button3.Location = new Point(2497, 120);
             button3.Name = "button3";
             button3.Size = new Size(75, 147);
             button3.TabIndex = 5;
@@ -915,7 +936,7 @@
             // 
             label11.Anchor = AnchorStyles.Top;
             label11.AutoSize = true;
-            label11.Location = new Point(438, 0);
+            label11.Location = new Point(437, 0);
             label11.Name = "label11";
             label11.Size = new Size(121, 15);
             label11.TabIndex = 0;
@@ -923,26 +944,92 @@
             // 
             // tabNotas
             // 
-            tabNotas.Controls.Add(button7);
-            tabNotas.Controls.Add(textBoxIdHiddenClienteNotas);
+            tabNotas.Controls.Add(button9);
+            tabNotas.Controls.Add(button8);
+            tabNotas.Controls.Add(label22);
+            tabNotas.Controls.Add(listViewNotasCliente);
+            tabNotas.Controls.Add(panel4);
             tabNotas.Controls.Add(label21);
-            tabNotas.Controls.Add(button2);
-            tabNotas.Controls.Add(label20);
             tabNotas.Controls.Add(listViewNotas);
-            tabNotas.Controls.Add(dateTimePicker1);
-            tabNotas.Controls.Add(textBoxNomeClienteNotas);
-            tabNotas.Controls.Add(label19);
             tabNotas.Location = new Point(4, 24);
             tabNotas.Name = "tabNotas";
             tabNotas.Padding = new Padding(3);
-            tabNotas.Size = new Size(1022, 538);
+            tabNotas.Size = new Size(1020, 538);
             tabNotas.TabIndex = 3;
             tabNotas.Text = "Gerenciar Notas";
             tabNotas.UseVisualStyleBackColor = true;
             // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new Point(6, 183);
+            label22.Name = "label22";
+            label22.Size = new Size(95, 15);
+            label22.TabIndex = 11;
+            label22.Text = "Notas do Cliente";
+            // 
+            // listViewNotasCliente
+            // 
+            listViewNotasCliente.Columns.AddRange(new ColumnHeader[] { columnHeader6, columnHeader7, columnHeader8, columnHeader9 });
+            listViewNotasCliente.FullRowSelect = true;
+            listViewNotasCliente.Location = new Point(7, 211);
+            listViewNotasCliente.MultiSelect = false;
+            listViewNotasCliente.Name = "listViewNotasCliente";
+            listViewNotasCliente.Size = new Size(567, 276);
+            listViewNotasCliente.TabIndex = 10;
+            listViewNotasCliente.UseCompatibleStateImageBehavior = false;
+            listViewNotasCliente.View = View.Details;
+            // 
+            // columnHeader6
+            // 
+            columnHeader6.Text = "Id";
+            // 
+            // columnHeader7
+            // 
+            columnHeader7.Text = "Cliente";
+            columnHeader7.Width = 200;
+            // 
+            // columnHeader8
+            // 
+            columnHeader8.Text = "Preç Nota";
+            columnHeader8.Width = 100;
+            // 
+            // columnHeader9
+            // 
+            columnHeader9.Text = "Data da Compra";
+            columnHeader9.Width = 190;
+            // 
+            // panel4
+            // 
+            panel4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel4.BackColor = Color.MistyRose;
+            panel4.Controls.Add(maskedTextBox2);
+            panel4.Controls.Add(button7);
+            panel4.Controls.Add(button10);
+            panel4.Controls.Add(textBoxIdHiddenClienteNotas);
+            panel4.Controls.Add(label20);
+            panel4.Controls.Add(dateTimePicker1);
+            panel4.Controls.Add(button2);
+            panel4.Controls.Add(label19);
+            panel4.Controls.Add(textBoxNomeClienteNotas);
+            panel4.Location = new Point(6, 6);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(568, 162);
+            panel4.TabIndex = 9;
+            // 
+            // maskedTextBox2
+            // 
+            maskedTextBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            maskedTextBox2.BorderStyle = BorderStyle.None;
+            maskedTextBox2.Location = new Point(2502, 81);
+            maskedTextBox2.Mask = "000,000,000-00";
+            maskedTextBox2.Name = "maskedTextBox2";
+            maskedTextBox2.Size = new Size(438, 16);
+            maskedTextBox2.TabIndex = 6;
+            // 
             // button7
             // 
-            button7.Location = new Point(869, 47);
+            button7.Location = new Point(418, 124);
             button7.Name = "button7";
             button7.Size = new Size(120, 23);
             button7.TabIndex = 8;
@@ -950,26 +1037,43 @@
             button7.UseVisualStyleBackColor = true;
             button7.Click += buttonPesquisarNotas_Click;
             // 
+            // button10
+            // 
+            button10.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            button10.Location = new Point(2865, 120);
+            button10.Name = "button10";
+            button10.Size = new Size(75, 209);
+            button10.TabIndex = 5;
+            button10.Text = "Cadastrar";
+            button10.UseVisualStyleBackColor = true;
+            // 
             // textBoxIdHiddenClienteNotas
             // 
-            textBoxIdHiddenClienteNotas.Location = new Point(144, 18);
+            textBoxIdHiddenClienteNotas.Location = new Point(17, 74);
             textBoxIdHiddenClienteNotas.Name = "textBoxIdHiddenClienteNotas";
             textBoxIdHiddenClienteNotas.Size = new Size(33, 23);
             textBoxIdHiddenClienteNotas.TabIndex = 7;
             textBoxIdHiddenClienteNotas.Visible = false;
             // 
-            // label21
+            // label20
             // 
-            label21.AutoSize = true;
-            label21.Location = new Point(33, 119);
-            label21.Name = "label21";
-            label21.Size = new Size(38, 15);
-            label21.TabIndex = 6;
-            label21.Text = "Notas";
+            label20.AutoSize = true;
+            label20.Location = new Point(338, 27);
+            label20.Name = "label20";
+            label20.Size = new Size(152, 15);
+            label20.TabIndex = 4;
+            label20.Text = "Selecione a data da compra";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(338, 42);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(200, 23);
+            dateTimePicker1.TabIndex = 2;
             // 
             // button2
             // 
-            button2.Location = new Point(170, 76);
+            button2.Location = new Point(154, 73);
             button2.Name = "button2";
             button2.Size = new Size(116, 23);
             button2.TabIndex = 5;
@@ -977,48 +1081,41 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += buttonPesquisarClienteNotas_Click;
             // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Location = new Point(344, 29);
-            label20.Name = "label20";
-            label20.Size = new Size(152, 15);
-            label20.TabIndex = 4;
-            label20.Text = "Selecione a data da compra";
-            // 
-            // listViewNotas
-            // 
-            listViewNotas.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5 });
-            listViewNotas.Location = new Point(33, 137);
-            listViewNotas.Name = "listViewNotas";
-            listViewNotas.Size = new Size(511, 337);
-            listViewNotas.TabIndex = 3;
-            listViewNotas.UseCompatibleStateImageBehavior = false;
-            listViewNotas.View = View.Details;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(344, 47);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 2;
-            // 
-            // textBoxNomeClienteNotas
-            // 
-            textBoxNomeClienteNotas.Enabled = false;
-            textBoxNomeClienteNotas.Location = new Point(33, 47);
-            textBoxNomeClienteNotas.Name = "textBoxNomeClienteNotas";
-            textBoxNomeClienteNotas.Size = new Size(253, 23);
-            textBoxNomeClienteNotas.TabIndex = 1;
-            // 
             // label19
             // 
             label19.AutoSize = true;
-            label19.Location = new Point(33, 29);
+            label19.Location = new Point(17, 27);
             label19.Name = "label19";
             label19.Size = new Size(105, 15);
             label19.TabIndex = 0;
             label19.Text = "Selecione o cliente";
+            // 
+            // textBoxNomeClienteNotas
+            // 
+            textBoxNomeClienteNotas.Enabled = false;
+            textBoxNomeClienteNotas.Location = new Point(17, 45);
+            textBoxNomeClienteNotas.Name = "textBoxNomeClienteNotas";
+            textBoxNomeClienteNotas.Size = new Size(253, 23);
+            textBoxNomeClienteNotas.TabIndex = 1;
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new Point(580, 6);
+            label21.Name = "label21";
+            label21.Size = new Size(103, 15);
+            label21.TabIndex = 6;
+            label21.Text = "Descrição da Nota";
+            // 
+            // listViewNotas
+            // 
+            listViewNotas.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5 });
+            listViewNotas.Location = new Point(580, 33);
+            listViewNotas.Name = "listViewNotas";
+            listViewNotas.Size = new Size(434, 454);
+            listViewNotas.TabIndex = 3;
+            listViewNotas.UseCompatibleStateImageBehavior = false;
+            listViewNotas.View = View.Details;
             // 
             // columnHeader1
             // 
@@ -1040,11 +1137,30 @@
             // 
             columnHeader5.Text = "Preç Total";
             // 
+            // button8
+            // 
+            button8.Location = new Point(457, 493);
+            button8.Name = "button8";
+            button8.Size = new Size(117, 23);
+            button8.TabIndex = 12;
+            button8.Text = "Visualize a nota";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += visualizeNota_Click;
+            // 
+            // button9
+            // 
+            button9.Location = new Point(939, 493);
+            button9.Name = "button9";
+            button9.Size = new Size(75, 23);
+            button9.TabIndex = 13;
+            button9.Text = "Emitir PDF";
+            button9.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1074, 630);
+            ClientSize = new Size(1072, 630);
             Controls.Add(tabControl1);
             Name = "Form1";
             Text = "Mini ERP";
@@ -1072,6 +1188,8 @@
             panel3.PerformLayout();
             tabNotas.ResumeLayout(false);
             tabNotas.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -1112,7 +1230,6 @@
         private ListView listViewFornecedores;
         private ColumnHeader razaoSocial;
         private ColumnHeader cnpj;
-        private TextBox textBoxBuscaCnpjFornecedor;
         private Panel panel3;
         private Button buttonCadastrarProduto;
         private MaskedTextBox maskedTextBox3;
@@ -1175,5 +1292,18 @@
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
+        private ColumnHeader precoTotalItem;
+        private Panel panel4;
+        private MaskedTextBox maskedTextBox2;
+        private Button button10;
+        private ListView listViewNotasCliente;
+        private ColumnHeader columnHeader6;
+        private ColumnHeader columnHeader7;
+        private ColumnHeader columnHeader8;
+        private ColumnHeader columnHeader9;
+        private Label label22;
+        private MaskedTextBox textBoxBuscaCnpjFornecedor;
+        private Button button9;
+        private Button button8;
     }
 }

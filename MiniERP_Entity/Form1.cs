@@ -241,7 +241,7 @@ namespace MiniERP_Entity
                 {
                     p.Nome = textBoxDescricaoProduto.Text;
                     p.Preco = decimal.Parse(textBoxPrecoProduto.Text);
-                    p.QtdEstoque = int.Parse(textBoxPrecoProduto.Text);
+                    p.QtdEstoque = int.Parse(textBoxEstoqueProduto.Text);
                     p.FornecedorId = int.Parse(textBoxIdForneceProduto.Text);
                     contexto.Produtos.Add(p);
                     contexto.SaveChanges();
@@ -360,17 +360,16 @@ namespace MiniERP_Entity
 
                 foreach (ListViewItem item in linha)
                 {
-                    //pega o id do campo Hidden na tab Loja
-                    int idCliente = int.Parse(textBoxIdClienteHiddenLoja.Text);
                     //pega o Id do produto na ListView na tab Loja
                     int idProduto = int.Parse(item.SubItems[0].Text);
                     //Pega o nome do produto na coluna de indice 1 da listView na tab Loja
                     string nomeProduto = item.SubItems[1].Text;
                     decimal precoProduto = decimal.Parse(item.SubItems[2].Text);
-                    cp.ClienteId = idCliente;
                     cp.ProdutoId = idProduto;
-                    cp.Produto = new Produto { Nome = nomeProduto, Preco = precoProduto };
+                    cp.Produto = new Produto { Nome = nomeProduto };
+                    cp.PrecoUnitario = precoProduto;
                     cp.QtdTotal = 1;
+                    cp.PrecoTotal = 1 * precoProduto;
                     listaCarrinho.Add(cp);
                     AtualizarListaItens();
                 }
@@ -383,24 +382,20 @@ namespace MiniERP_Entity
 
         private void AtualizarListaItens()
         {
-            decimal valorTotal = 0;
-            //List<ClienteProduto> listaCarrinhoBanco = new List<ClienteProduto>();
+            decimal valorTotalItem = 0;
+            decimal valorTotalCompra = 0;
+
             listViewCarrinhoCompraLoja.Items.Clear();
-            //listaCarrinhoBanco = (from ClienteProduto cp in contexto.ClientesProdutos select cp)
-            //    .ToList();
-
-            //listaCarrinhoBanco.Sort((a, b) => a.Produto.Nome.CompareTo(b.Produto.Nome));
-
 
             foreach (var i in listaCarrinho)
             {
                 int index = listaCarrinho.IndexOf(i);
-                string[] itens = { index.ToString(), i.Produto.Nome, i.Produto.Preco.ToString(), i.QtdTotal.ToString() };
+                valorTotalItem = i.PrecoUnitario * i.QtdTotal;
+
+                string[] itens = { index.ToString(), i.Produto.Nome, i.PrecoUnitario.ToString(), i.QtdTotal.ToString(), valorTotalItem.ToString() };
                 listViewCarrinhoCompraLoja.Items.Add(new ListViewItem(itens));
-
-                valorTotal += i.Produto.Preco * i.QtdTotal;
-
-                labelPrecoTotal.Text = valorTotal.ToString();
+                valorTotalCompra += valorTotalItem;
+                labelPrecoTotal.Text = valorTotalCompra.ToString();
             }
         }
 
@@ -466,18 +461,17 @@ namespace MiniERP_Entity
 
                     foreach (ListViewItem item in linha)
                     {
-                        //pega o id do campo Hidden na tab Loja
-                        int idCliente = int.Parse(textBoxIdClienteHiddenLoja.Text);
                         //pega o Id do produto na ListView na tab Loja
                         int idProduto = int.Parse(item.SubItems[0].Text);
                         //Pega o nome do produto na coluna de indice 1 da listView na tab Loja
                         string nomeProduto = item.SubItems[1].Text;
 
                         decimal precoProduto = decimal.Parse(item.SubItems[2].Text);
-                        cp.ClienteId = idCliente;
                         cp.ProdutoId = idProduto;
-                        cp.Produto = new Produto { Nome = nomeProduto, Preco = precoProduto };
+                        cp.Produto = new Produto { Nome = nomeProduto };
+                        cp.PrecoUnitario = precoProduto;
                         cp.QtdTotal = int.Parse(quantidade);
+                        cp.PrecoTotal = int.Parse(quantidade) * precoProduto;
                         listaCarrinho.Add(cp);
                         AtualizarListaItens();
                         textBoxInformeQtd.Text = String.Empty;
@@ -500,14 +494,36 @@ namespace MiniERP_Entity
         {
             try
             {
-                ClienteProduto clipro = new ClienteProduto();
-                foreach (var i in listaCarrinho)
+                int clienteID = int.Parse(textBoxIdClienteHiddenLoja.Text);
+                decimal valorTotalCompra = decimal.Parse(labelPrecoTotal.Text);
+
+                List<ClienteProduto> listaClienteProdutos = new List<ClienteProduto>();
+                foreach (var produtoCarrinho in listaCarrinho)
                 {
-                    contexto.ClientesProdutos.Add(new() { ClienteId = i.ClienteId, ProdutoId = i.ProdutoId, PrecoTotal = decimal.Parse(labelPrecoTotal.Text), QtdTotal = i.QtdTotal });
+
+                    ClienteProduto clipro = new ClienteProduto
+                    {
+                        ProdutoId = produtoCarrinho.ProdutoId,
+                        PrecoTotal = produtoCarrinho.PrecoTotal,
+                        QtdTotal = produtoCarrinho.QtdTotal,
+                        PrecoUnitario = produtoCarrinho.PrecoUnitario
+                    };
+
+                    listaClienteProdutos.Add(clipro);
                 }
+                contexto.Notas.Add(new Nota
+                {
+                    ClienteId = clienteID,
+                    PrecoTotalCompra = valorTotalCompra,
+                    clienteProdutos = listaClienteProdutos
+                });
+
                 contexto.SaveChanges();
                 MessageBox.Show("Pedido finalizado!");
+                listaCarrinho.Clear();
                 listViewCarrinhoCompraLoja.Items.Clear();
+                labelPrecoTotal.Text = String.Empty;
+                buttonRemoverNomePesquisaAreaitens.Enabled = false;
                 buttonRemoverNomePesquisaAreaitens_Click(sender, e);
             }
             catch (Exception ex)
@@ -515,6 +531,7 @@ namespace MiniERP_Entity
                 MessageBox.Show("Ocorreu um erro: " + ex.Message);
             }
         }
+
 
         private void buttonPesquisarClienteNotas_Click(object sender, EventArgs e)
         {
@@ -537,18 +554,31 @@ namespace MiniERP_Entity
 
         private void buttonPesquisarNotas_Click(object sender, EventArgs e)
         {
-            AtualizarListaNotas();
+            int id = int.Parse(textBoxIdHiddenClienteNotas.Text);
+            List<Nota> listaNotas = new List<Nota>();
+            listaNotas.Clear();
+            listaNotas =
+                (from Nota n in contexto.Notas select n)
+                .Where(c => c.ClienteId == id)
+                .ToList<Nota>();
+
+            listViewItensLoja.Items.Clear();
+
+            foreach (var item in listaNotas)
+            {
+                string[] itens = { item.Id.ToString(), item.Cliente.Nome, item.PrecoTotalCompra.ToString(), item.Data.ToString() };
+                listViewNotasCliente.Items.Add(new ListViewItem(itens));
+            }
         }
 
         private void AtualizarListaNotas()
         {
             int id = int.Parse(textBoxIdHiddenClienteNotas.Text);
-            List<ClienteProduto> listaNotas = new List<ClienteProduto>();
+            List<Nota> listaNotas = new List<Nota>();
 
             listaNotas =
-                (from ClienteProduto cp in contexto.ClientesProdutos select cp)
-                    .Where(cp => cp.ClienteId == id)
-                    .ToList<ClienteProduto>();
+                (from Nota n in contexto.Notas select n)
+                    .ToList<Nota>();
 
             //listaNotas.Sort((a, b) => a.Nome.CompareTo(b.Nome));
 
@@ -556,8 +586,34 @@ namespace MiniERP_Entity
 
             foreach (var item in listaNotas)
             {
-                string[] itens = { item.Id.ToString(), item.Produto.Nome, item.QtdTotal.ToString(), item.Produto.Preco.ToString(), item.PrecoTotal.ToString() };
+                string[] itens = { item.PrecoTotalCompra.ToString(), item.Cliente.Nome, item.Data.ToString() };
                 listViewNotas.Items.Add(new ListViewItem(itens));
+            }
+        }
+
+        private void visualizeNota_Click(object sender, EventArgs e)
+        {
+            if (listViewNotasCliente.SelectedItems.Count > 0)
+            {
+                ListView.SelectedListViewItemCollection linha = this.listViewNotasCliente.SelectedItems;
+
+                listViewNotas.Items.Clear();
+                foreach (ListViewItem item in linha)
+                {
+                    int idNota = int.Parse(item.SubItems[0].Text);
+                    List<ClienteProduto> listaItensDaNota = contexto.ClientesProdutos
+                        .Where(cp => cp.NotaId == idNota)
+                        .ToList();
+                    foreach(var i in listaItensDaNota)
+                    {
+                        string[] itens = { i.NotaId.ToString(), i.Produto.Nome, i.QtdTotal.ToString(), i.PrecoUnitario.ToString(), i.PrecoTotal.ToString()};
+                        listViewNotas.Items.Add(new ListViewItem(itens));
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um item", "Aviso");
             }
         }
     }

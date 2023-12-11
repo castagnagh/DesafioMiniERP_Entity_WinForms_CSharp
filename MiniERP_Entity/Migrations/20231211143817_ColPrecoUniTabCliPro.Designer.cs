@@ -12,8 +12,8 @@ using MiniERP_Entity;
 namespace MiniERP_Entity.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20231209143253_fkclienteproduto")]
-    partial class fkclienteproduto
+    [Migration("20231211143817_ColPrecoUniTabCliPro")]
+    partial class ColPrecoUniTabCliPro
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,15 +53,13 @@ namespace MiniERP_Entity.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ClienteId")
+                    b.Property<int>("NotaId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Data")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
                     b.Property<decimal>("PrecoTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PrecoUnitario")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ProdutoId")
@@ -72,7 +70,7 @@ namespace MiniERP_Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClienteId");
+                    b.HasIndex("NotaId");
 
                     b.HasIndex("ProdutoId");
 
@@ -98,6 +96,32 @@ namespace MiniERP_Entity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Fornecedores");
+                });
+
+            modelBuilder.Entity("MiniERP_Entity.DataModels.Nota", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Data")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<decimal>("PrecoTotalCompra")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.ToTable("Notas");
                 });
 
             modelBuilder.Entity("MiniERP_Entity.DataModels.Produto", b =>
@@ -130,10 +154,10 @@ namespace MiniERP_Entity.Migrations
 
             modelBuilder.Entity("MiniERP_Entity.DataModels.ClienteProduto", b =>
                 {
-                    b.HasOne("MiniERP_Entity.DataModels.Cliente", "Cliente")
-                        .WithMany("ClientesProdutos")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("MiniERP_Entity.DataModels.Nota", "Nota")
+                        .WithMany("clienteProdutos")
+                        .HasForeignKey("NotaId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("MiniERP_Entity.DataModels.Produto", "Produto")
@@ -142,9 +166,20 @@ namespace MiniERP_Entity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cliente");
+                    b.Navigation("Nota");
 
                     b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("MiniERP_Entity.DataModels.Nota", b =>
+                {
+                    b.HasOne("MiniERP_Entity.DataModels.Cliente", "Cliente")
+                        .WithMany("Notas")
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("MiniERP_Entity.DataModels.Produto", b =>
@@ -152,7 +187,7 @@ namespace MiniERP_Entity.Migrations
                     b.HasOne("MiniERP_Entity.DataModels.Fornecedor", "Fornecedor")
                         .WithMany("Produtos")
                         .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Fornecedor");
@@ -160,12 +195,17 @@ namespace MiniERP_Entity.Migrations
 
             modelBuilder.Entity("MiniERP_Entity.DataModels.Cliente", b =>
                 {
-                    b.Navigation("ClientesProdutos");
+                    b.Navigation("Notas");
                 });
 
             modelBuilder.Entity("MiniERP_Entity.DataModels.Fornecedor", b =>
                 {
                     b.Navigation("Produtos");
+                });
+
+            modelBuilder.Entity("MiniERP_Entity.DataModels.Nota", b =>
+                {
+                    b.Navigation("clienteProdutos");
                 });
 #pragma warning restore 612, 618
         }

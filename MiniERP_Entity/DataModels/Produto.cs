@@ -13,8 +13,7 @@ namespace MiniERP_Entity.DataModels
         public decimal Preco {  get; set; }
         public int QtdEstoque { get; set; }
         public int FornecedorId { get; set; }
-        public virtual Fornecedor Fornecedor { get; set; } = null!;
-        public virtual List<Cliente> Clientes { get; } = new();
+        public virtual Fornecedor Fornecedor { get; set; }
 
         public override bool Equals(object? obj)
         {
