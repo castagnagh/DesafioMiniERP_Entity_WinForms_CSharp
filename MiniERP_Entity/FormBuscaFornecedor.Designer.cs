@@ -113,7 +113,8 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "FormBuscaFornecedor";
-            Text = "FormBuscaFornecedor";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Pesquisa de Fornecedor";
             ResumeLayout(false);
             PerformLayout();
         }

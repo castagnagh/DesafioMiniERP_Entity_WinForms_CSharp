@@ -86,6 +86,7 @@ namespace MiniERP_Entity.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProdutoId = table.Column<int>(type: "int", nullable: false),
                     QtdTotal = table.Column<int>(type: "int", nullable: false),
+                    PrecoUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PrecoTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     NotaId = table.Column<int>(type: "int", nullable: false)
                 },

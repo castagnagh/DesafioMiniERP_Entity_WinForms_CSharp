@@ -54,3 +54,17 @@ C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\Mi
 C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\obj\Debug\net6.0-windows\ref\MiniERP_Entity.dll
 C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\obj\Debug\net6.0-windows\MiniERP_Entity.FormBuscaFornecedor.resources
 C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\obj\Debug\net6.0-windows\MiniERP_Entity.FormBuscarCliente.resources
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\itext.barcodes.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\itext.forms.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\itext.io.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\itext.kernel.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\itext.layout.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\itext.pdfa.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\itext.sign.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\itext.styledxmlparser.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\itext.svg.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\itext.commons.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyModel.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
+C:\Users\GabrielCastagna\Documents\_git\DesafioMiniERP_Entity_WinForms_CSharp\MiniERP_Entity\bin\Debug\net6.0-windows\BouncyCastle.Crypto.dll

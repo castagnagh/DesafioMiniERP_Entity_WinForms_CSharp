@@ -1,4 +1,12 @@
 using Castle.Core.Internal;
+using iText.IO.Font.Constants;
+using iText.Kernel.Font;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Borders;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 using MiniERP_Entity.DataModels;
 
 namespace MiniERP_Entity
@@ -7,7 +15,7 @@ namespace MiniERP_Entity
     {
         Contexto contexto = new Contexto();
         List<ClienteProduto> listaCarrinho = new List<ClienteProduto>();
-
+        List<ClienteProduto> listaItensDaNota = new List<ClienteProduto>();
         public Form1()
         {
             InitializeComponent();
@@ -327,6 +335,7 @@ namespace MiniERP_Entity
                 buttonSelecionarItemLoja.Enabled = true;
                 buttonPesquisaClienteLoja.Enabled = false;
                 buttonRemoverNomePesquisaAreaitens.Visible = true;
+                buttonRemoverNomePesquisaAreaitens.Enabled = true;
                 buttonAddQtdItemLoja.Enabled = true;
                 textBoxInformeQtd.Enabled = true;
             }
@@ -401,21 +410,14 @@ namespace MiniERP_Entity
 
         private void buttonRemoverNomePesquisaAreaitens_Click(object sender, EventArgs e)
         {
-            if (listaCarrinho.Count > 0)
-            {
-                MessageBox.Show("Há itens no carrinho, cancele a compra primeiro!", "Aviso");
-                return;
-            }
-            else
-            {
-                textBoxIdClienteHiddenLoja.Text = String.Empty;
-                textBoxPesquisaClienteLoja.Text = String.Empty;
-                listViewItensLoja.Enabled = false;
-                buttonSelecionarItemLoja.Enabled = false;
-                buttonPesquisaClienteLoja.Enabled = true;
-                buttonRemoverNomePesquisaAreaitens.Visible = true;
-                buttonAddQtdItemLoja.Enabled = false;
-            }
+            buttonCancelarCompra_Click(sender, e);
+            textBoxIdClienteHiddenLoja.Text = String.Empty;
+            textBoxPesquisaClienteLoja.Text = String.Empty;
+            listViewItensLoja.Enabled = false;
+            buttonSelecionarItemLoja.Enabled = false;
+            buttonPesquisaClienteLoja.Enabled = true;
+            buttonRemoverNomePesquisaAreaitens.Visible = true;
+            buttonAddQtdItemLoja.Enabled = false;
         }
 
         private void buttonCancelarCompra_Click(object sender, EventArgs e)
@@ -433,20 +435,6 @@ namespace MiniERP_Entity
                 return;
             }
         }
-
-        private void buttonRemoverItem_Click(object sender, EventArgs e)
-        {
-            if (listViewItensLoja.SelectedItems.Count > 0)
-            {
-                ListView.SelectedListViewItemCollection linha = this.listViewItensLoja.SelectedItems;
-
-                foreach (var i in linha)
-                {
-                    //listaCarrinho.RemoveAt();
-                }
-            }
-        }
-
         private void buttonAddQtdItemLoja_Click(object sender, EventArgs e)
         {
             textBoxInformeQtd.Focus();
@@ -554,6 +542,7 @@ namespace MiniERP_Entity
 
         private void buttonPesquisarNotas_Click(object sender, EventArgs e)
         {
+            listViewNotasCliente.Items.Clear();
             int id = int.Parse(textBoxIdHiddenClienteNotas.Text);
             List<Nota> listaNotas = new List<Nota>();
             listaNotas.Clear();
@@ -571,26 +560,6 @@ namespace MiniERP_Entity
             }
         }
 
-        private void AtualizarListaNotas()
-        {
-            int id = int.Parse(textBoxIdHiddenClienteNotas.Text);
-            List<Nota> listaNotas = new List<Nota>();
-
-            listaNotas =
-                (from Nota n in contexto.Notas select n)
-                    .ToList<Nota>();
-
-            //listaNotas.Sort((a, b) => a.Nome.CompareTo(b.Nome));
-
-            listViewItensLoja.Items.Clear();
-
-            foreach (var item in listaNotas)
-            {
-                string[] itens = { item.PrecoTotalCompra.ToString(), item.Cliente.Nome, item.Data.ToString() };
-                listViewNotas.Items.Add(new ListViewItem(itens));
-            }
-        }
-
         private void visualizeNota_Click(object sender, EventArgs e)
         {
             if (listViewNotasCliente.SelectedItems.Count > 0)
@@ -601,12 +570,13 @@ namespace MiniERP_Entity
                 foreach (ListViewItem item in linha)
                 {
                     int idNota = int.Parse(item.SubItems[0].Text);
-                    List<ClienteProduto> listaItensDaNota = contexto.ClientesProdutos
+                    textBoxIdHiddenNota.Text = idNota.ToString();
+                    listaItensDaNota = contexto.ClientesProdutos
                         .Where(cp => cp.NotaId == idNota)
                         .ToList();
-                    foreach(var i in listaItensDaNota)
+                    foreach (var i in listaItensDaNota)
                     {
-                        string[] itens = { i.NotaId.ToString(), i.Produto.Nome, i.QtdTotal.ToString(), i.PrecoUnitario.ToString(), i.PrecoTotal.ToString()};
+                        string[] itens = { i.Id.ToString(), i.Produto.Nome, i.QtdTotal.ToString(), i.PrecoUnitario.ToString(), i.PrecoTotal.ToString() };
                         listViewNotas.Items.Add(new ListViewItem(itens));
                     }
                 }
@@ -614,6 +584,103 @@ namespace MiniERP_Entity
             else
             {
                 MessageBox.Show("Selecione um item", "Aviso");
+            }
+        }
+
+        private void buttonEmitirPDF_Click(object sender, EventArgs e)
+        {
+            string idNota = textBoxIdHiddenNota.Text;
+            string nomeDoArquivo = ($"nota{idNota}.pdf");
+            GerarPdf(nomeDoArquivo);
+        }
+
+        private void GerarPdf(string arquivo)
+        {
+            using (PdfWriter wPdf = new PdfWriter(arquivo, new WriterProperties().SetPdfVersion(PdfVersion.PDF_2_0)))
+            {
+                var pdfDocument = new PdfDocument(wPdf);
+
+                var document = new Document(pdfDocument, PageSize.A4);
+
+                //cria a tabela passa as porcentagens e usa toda a largura da pagina
+                float[] columnWidths = { 5, 40, 8, 10, 15 };
+                Table tabela = new Table(UnitValue.CreatePercentArray(columnWidths))
+                    .UseAllAvailableWidth();
+
+                //Titulo da tabela
+                var fonte = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+                tabela.AddHeaderCell(new Cell(1, 5).Add(new Paragraph("Emissão de Nota Nr " + textBoxIdHiddenNota.Text)
+                    .SetFont(fonte)
+                    .SetFontSize(18)
+                    .SetPadding(10)
+                    .SetTextAlignment(TextAlignment.CENTER)));
+
+                //Cabeçalho com os titulos das colunas
+                tabela.AddHeaderCell(new Cell()
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .Add(new Paragraph("Cod")));
+                tabela.AddHeaderCell(new Cell()
+                    .SetPaddingLeft(5)
+                    .Add(new Paragraph("Descrição do Produto")));
+                tabela.AddHeaderCell(new Cell()
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .Add(new Paragraph("Qtd")));
+                tabela.AddHeaderCell(new Cell()
+                    .SetTextAlignment(TextAlignment.RIGHT)
+                    .SetPaddingRight(10)
+                    .Add(new Paragraph("Preço Un")));
+                tabela.AddHeaderCell(new Cell()
+                    .SetTextAlignment(TextAlignment.RIGHT)
+                    .SetPaddingRight(10)
+                    .Add(new Paragraph("Preço Total")));
+                tabela.SetSkipFirstHeader(false);
+
+                decimal valorTotalCompra = 0;
+                foreach (ClienteProduto i in listaItensDaNota)
+                {
+                    valorTotalCompra += i.PrecoTotal;
+                    tabela.AddCell(new Cell()
+                        .SetTextAlignment(TextAlignment.CENTER)
+                        .Add(new Paragraph(i.Id.ToString())));
+
+                    tabela.AddCell(new Cell()
+                        .SetTextAlignment(TextAlignment.CENTER)
+                        .Add(new Paragraph(i.Produto.Nome)));
+
+                    tabela.AddCell(new Cell().SetTextAlignment(TextAlignment.CENTER)
+                        .Add(new Paragraph(i.QtdTotal.ToString())));
+
+                    tabela.AddCell(new Cell()
+                        .SetTextAlignment(TextAlignment.RIGHT)
+                        .SetPaddingRight(10)
+                        .Add(new Paragraph(i.PrecoUnitario.ToString())));
+
+                    tabela.AddCell(new Cell()
+                        .SetTextAlignment(TextAlignment.RIGHT)
+                        .SetPaddingRight(10)
+                        .Add(new Paragraph(i.PrecoTotal.ToString())));
+                }
+                tabela.AddCell(new Cell(1, 5)
+                        .SetTextAlignment(TextAlignment.RIGHT)
+                        .SetPaddingRight(10)
+                        .Add(new Paragraph("TOTAL: " + valorTotalCompra.ToString())));
+
+                var cellFooter = new Cell(1, 5)
+                    .Add(new Paragraph("Cliente: " + textBoxNomeClienteNotas.Text))
+                    .SetFont(fonte)
+                    .SetFontSize(10)
+                    .SetPaddingLeft(10)
+                    .SetBorder(Border.NO_BORDER);
+
+                tabela.AddFooterCell(cellFooter);
+
+                document.Add(tabela);
+                document.Close();
+
+                pdfDocument.Close();
+
+                MessageBox.Show("Arquivo PDF gerado em " + arquivo);
+
             }
         }
     }

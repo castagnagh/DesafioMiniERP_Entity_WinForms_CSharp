@@ -33,7 +33,6 @@
             splitContainer1 = new SplitContainer();
             button6 = new Button();
             button5 = new Button();
-            button4 = new Button();
             labelPrecoTotal = new Label();
             label18 = new Label();
             listViewCarrinhoCompraLoja = new ListView();
@@ -113,6 +112,9 @@
             label10 = new Label();
             label11 = new Label();
             tabNotas = new TabPage();
+            textBoxIdHiddenNota = new TextBox();
+            button9 = new Button();
+            button8 = new Button();
             label22 = new Label();
             listViewNotasCliente = new ListView();
             columnHeader6 = new ColumnHeader();
@@ -136,8 +138,6 @@
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
-            button8 = new Button();
-            button9 = new Button();
             tabControl1.SuspendLayout();
             tabVendas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -188,7 +188,6 @@
             // 
             splitContainer1.Panel1.Controls.Add(button6);
             splitContainer1.Panel1.Controls.Add(button5);
-            splitContainer1.Panel1.Controls.Add(button4);
             splitContainer1.Panel1.Controls.Add(labelPrecoTotal);
             splitContainer1.Panel1.Controls.Add(label18);
             splitContainer1.Panel1.Controls.Add(listViewCarrinhoCompraLoja);
@@ -222,23 +221,13 @@
             // 
             // button5
             // 
-            button5.Location = new Point(114, 482);
+            button5.Location = new Point(17, 474);
             button5.Name = "button5";
             button5.Size = new Size(107, 23);
             button5.TabIndex = 5;
             button5.Text = "Cancelar Compra";
             button5.UseVisualStyleBackColor = true;
             button5.Click += buttonCancelarCompra_Click;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(17, 482);
-            button4.Name = "button4";
-            button4.Size = new Size(91, 23);
-            button4.TabIndex = 4;
-            button4.Text = "Remover Item";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += buttonRemoverItem_Click;
             // 
             // labelPrecoTotal
             // 
@@ -944,6 +933,7 @@
             // 
             // tabNotas
             // 
+            tabNotas.Controls.Add(textBoxIdHiddenNota);
             tabNotas.Controls.Add(button9);
             tabNotas.Controls.Add(button8);
             tabNotas.Controls.Add(label22);
@@ -958,6 +948,34 @@
             tabNotas.TabIndex = 3;
             tabNotas.Text = "Gerenciar Notas";
             tabNotas.UseVisualStyleBackColor = true;
+            // 
+            // textBoxIdHiddenNota
+            // 
+            textBoxIdHiddenNota.Location = new Point(689, 4);
+            textBoxIdHiddenNota.Name = "textBoxIdHiddenNota";
+            textBoxIdHiddenNota.Size = new Size(33, 23);
+            textBoxIdHiddenNota.TabIndex = 9;
+            textBoxIdHiddenNota.Visible = false;
+            // 
+            // button9
+            // 
+            button9.Location = new Point(939, 493);
+            button9.Name = "button9";
+            button9.Size = new Size(75, 23);
+            button9.TabIndex = 13;
+            button9.Text = "Emitir PDF";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += buttonEmitirPDF_Click;
+            // 
+            // button8
+            // 
+            button8.Location = new Point(457, 493);
+            button8.Name = "button8";
+            button8.Size = new Size(117, 23);
+            button8.TabIndex = 12;
+            button8.Text = "Visualize a nota";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += visualizeNota_Click;
             // 
             // label22
             // 
@@ -1137,25 +1155,6 @@
             // 
             columnHeader5.Text = "Preç Total";
             // 
-            // button8
-            // 
-            button8.Location = new Point(457, 493);
-            button8.Name = "button8";
-            button8.Size = new Size(117, 23);
-            button8.TabIndex = 12;
-            button8.Text = "Visualize a nota";
-            button8.UseVisualStyleBackColor = true;
-            button8.Click += visualizeNota_Click;
-            // 
-            // button9
-            // 
-            button9.Location = new Point(939, 493);
-            button9.Name = "button9";
-            button9.Size = new Size(75, 23);
-            button9.TabIndex = 13;
-            button9.Text = "Emitir PDF";
-            button9.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1273,7 +1272,6 @@
         private ColumnHeader qtdItem;
         private Button button6;
         private Button button5;
-        private Button button4;
         private Button buttonAddQtdItemLoja;
         private ColumnHeader nr;
         private TextBox textBoxInformeQtd;
@@ -1305,5 +1303,6 @@
         private MaskedTextBox textBoxBuscaCnpjFornecedor;
         private Button button9;
         private Button button8;
+        private TextBox textBoxIdHiddenNota;
     }
 }

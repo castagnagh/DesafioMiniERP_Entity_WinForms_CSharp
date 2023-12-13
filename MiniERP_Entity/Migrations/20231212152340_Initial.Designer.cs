@@ -12,8 +12,8 @@ using MiniERP_Entity;
 namespace MiniERP_Entity.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20231211143817_ColPrecoUniTabCliPro")]
-    partial class ColPrecoUniTabCliPro
+    [Migration("20231212152340_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

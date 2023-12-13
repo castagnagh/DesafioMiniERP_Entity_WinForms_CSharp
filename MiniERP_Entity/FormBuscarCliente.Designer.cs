@@ -113,7 +113,8 @@
             Controls.Add(listViewClientesBusca);
             Controls.Add(label1);
             Name = "FormBuscarCliente";
-            Text = "FormBuscarCliente";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Pesquisa de Cliente";
             ResumeLayout(false);
             PerformLayout();
         }
